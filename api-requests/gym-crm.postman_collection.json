@@ -1,0 +1,699 @@
+{
+	"info": {
+		"_postman_id": "94b19df6-0428-4ac0-aecf-8efdc9a2d54c",
+		"name": "gym-crm",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5092762"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/auth/login?username=ali.veli&password=1234",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"auth",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "ali.veli"
+								},
+								{
+									"key": "password",
+									"value": "1234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"ali.veli\",\r\n    \"oldPassword\": \"1234\",\r\n    \"newPassword\": \"11235\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/auth/change-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trainee",
+			"item": [
+				{
+					"name": "Create a Trainee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Ahmet\",\r\n  \"lastName\": \"Kek\",\r\n  \"dateOfBirth\": \"1990-01-01\",\r\n  \"address\": \"Istanbul\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Trainee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Username",
+								"value": "ali.veli",
+								"type": "text"
+							},
+							{
+								"key": "X-Password",
+								"value": "1234",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"ali.veli\",\r\n    \"firstName\": \"Ali\",\r\n    \"lastName\": \"Veli\",\r\n    \"dateOfBirth\": \"1991-01-01\",\r\n    \"address\": \"Izmir\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate Trainee Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Username",
+								"value": "ali.veli",
+								"type": "text"
+							},
+							{
+								"key": "X-Password",
+								"value": "1234",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"ali.veli\",\r\n    \"isActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainees/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainees",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Trainee Trainers",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Username",
+								"value": "ali.veli",
+								"type": "text"
+							},
+							{
+								"key": "X-Password",
+								"value": "1234",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"traineeUsername\": \"ali.veli\",\r\n    \"trainers\": [\r\n        {\r\n            \"trainerUsername\": \"ayse.yilmaz\"\r\n        },\r\n        {\r\n            \"trainerUsername\": \"gizem.kara\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainees/trainers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainees",
+								"trainers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve a Trainee By Username",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Username",
+								"value": "ali.veli",
+								"type": "text"
+							},
+							{
+								"key": "X-Password",
+								"value": "1234",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainees/profile?username=ali.veli",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainees",
+								"profile"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "ali.veli"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Trainee Unassigned Trainers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Username",
+								"value": "ali.veli",
+								"type": "text"
+							},
+							{
+								"key": "X-Password",
+								"value": "1234",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainees/unassigned-trainers?username=ali.veli",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainees",
+								"unassigned-trainers"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "ali.veli"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve a Training Trainee With Criteria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainees/trainings?username=ali.veli&periodFrom=2025-07-20&periodTo=2025-07-26&trainerName=Ayse&trainingType=Cardio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainees",
+								"trainings"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "ali.veli"
+								},
+								{
+									"key": "periodFrom",
+									"value": "2025-07-20"
+								},
+								{
+									"key": "periodTo",
+									"value": "2025-07-26"
+								},
+								{
+									"key": "trainerName",
+									"value": "Ayse"
+								},
+								{
+									"key": "trainingType",
+									"value": "Cardio"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Trainee By Username",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Username",
+								"value": "ali.veli",
+								"type": "text"
+							},
+							{
+								"key": "X-Password",
+								"value": "1234",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainees/ahmet.kek",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainees",
+								"ahmet.kek"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Training",
+			"item": [
+				{
+					"name": "Create a Training",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"traineeUsername\": \"ali.veli\",\r\n  \"trainerUsername\": \"tim.cook\",\r\n  \"trainingName\": \"Morning Cardio\",\r\n  \"trainingDate\": \"2025-07-22 10:00:00\",\r\n  \"trainingDuration\": 60\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trainer",
+			"item": [
+				{
+					"name": "Create a Trainer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Tim\",\r\n  \"lastName\": \"Cook\",\r\n  \"specialization\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Trainer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Username",
+								"value": "ayse.yilmaz",
+								"type": "text"
+							},
+							{
+								"key": "X-Password",
+								"value": "abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"tim.cook\",\r\n    \"firstName\": \"Tim\",\r\n    \"lastName\": \"Cookie\",\r\n    \"specialization\": 1,\r\n    \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainers/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainers",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate a Trainer",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Username",
+								"value": "ayse.yilmaz",
+								"type": "text"
+							},
+							{
+								"key": "X-Password",
+								"value": "abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"tim.cook\",\r\n    \"isActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainers/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainers",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve a Trainer By Username",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Username",
+								"value": "ayse.yilmaz",
+								"type": "text"
+							},
+							{
+								"key": "X-Password",
+								"value": "abcd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainers/profile?username=tim.cook",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainers",
+								"profile"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "tim.cook"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Unassigned Trainers For Trainee",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Username",
+								"value": "ayse.yilmaz",
+								"type": "text"
+							},
+							{
+								"key": "X-Password",
+								"value": "abcd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/trainers/trainings?periodFrom=2025-07-21&periodTo=2025-07-22&traineeName=Ali&username=tim.cook",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"trainers",
+								"trainings"
+							],
+							"query": [
+								{
+									"key": "periodFrom",
+									"value": "2025-07-21"
+								},
+								{
+									"key": "periodTo",
+									"value": "2025-07-22"
+								},
+								{
+									"key": "traineeName",
+									"value": "Ali"
+								},
+								{
+									"key": "username",
+									"value": "tim.cook"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Training Type",
+			"item": [
+				{
+					"name": "Retrieve all Training Types",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Yoga\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gym-crm/api/v1/training-types",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gym-crm",
+								"api",
+								"v1",
+								"training-types"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:8080",
+			"type": "default"
+		}
+	]
+}
