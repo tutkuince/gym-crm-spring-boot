@@ -5,7 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13102274-7f3e-4ae3-b397-80962da4df28" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/epam/gymcrm/GymCrmApplicationTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/gymcrm/GymCrmApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/epam/gymcrm/GymCrmApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/gymcrm/api/logging/RestLoggingInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/epam/gymcrm/api/logging/RestLoggingInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/gymcrm/api/logging/TransactionIdFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/epam/gymcrm/api/logging/TransactionIdFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/gymcrm/bootstrap/DataSqlRunner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/gymcrm/config/GymCrmApplicationInitializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/gymcrm/config/HibernateConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/gymcrm/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/epam/gymcrm/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +29,8 @@
       <list>
         <option value="Interface" />
         <option value="Record" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -42,7 +54,7 @@
   &quot;isMigrated&quot;: true
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -53,82 +65,82 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.GymCrmApplication.executor&quot;: &quot;Debug&quot;,
-    &quot;Docker.docker-compose.yml.postgres: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.infrastructure: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in gym-crm.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.AuthControllerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.AuthControllerTest.login_shouldReturn400_whenCredentialsInvalid.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.AuthControllerTest.login_shouldReturn400_whenInvalidCredentials.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.AuthServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GymCrmApplicationTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RestLoggingInterceptorTest.testPreHandle_and_AfterCompletion_logWithTransactionId.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.StorageTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TraineeControllerTest (1).executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TraineeControllerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TraineeControllerTest.shouldChangePasswordWhenValidRequestWithBody.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TraineeControllerTest.shouldCreateTrainee.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TraineeControllerTest.shouldReturnBadRequestWhenValidationFails.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TraineeControllerTest.shouldUpdateTrainee.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TraineeServiceTest (1).executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TraineeServiceTest.createTrainee_shouldThrowException_whenUserIsAlreadyTrainer.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TraineeServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TraineeServiceTest.shouldThrowInvalidCredentialsExceptionWhenUserNotFound.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TraineeServiceTest.updateActiveStatus_shouldActivate_whenInactive.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.TrainerControllerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TrainerControllerTest.getTrainerTrainings_shouldReturn401_whenNotAuthenticated.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TrainerControllerTest.shouldCreateTrainer.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TrainerControllerTest.updateTrainerProfile_shouldReturn401_whenNotAuthenticated.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TrainerServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TrainerServiceTest.shouldReturnUnassignedTrainersForTrainee.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TrainingControllerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TrainingControllerTest.shouldReturnTrainerTrainingsByCriteria.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TrainingControllerTest.shouldUpdateTraining.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TrainingServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TrainingSpecificationTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TrainingTypeControllerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TrainingTypeServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TransactionIdFilterTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.com.epam.gymcrm in gym-crm.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.com.epam.gymcrm.controller in gym-crm.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.com.epam.gymcrm.service in gym-crm.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.gymcrm in gym-crm.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.java in gym-crm.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.service in gym-crm.executor&quot;: &quot;Run&quot;,
-    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.gym-crm [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.gym-crm [package].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.GymCrmApplication.executor&quot;: &quot;Run&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/tutku/Documents/epam-java-specialization/task_5-rest/gym-crm-rest/api-requests&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.GymCrmApplication.executor": "Debug",
+    "Docker.docker-compose.yml.postgres: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+    "Docker.infrastructure: Compose Deployment.executor": "Run",
+    "JUnit.All in gym-crm.executor": "Coverage",
+    "JUnit.AuthControllerTest.executor": "Run",
+    "JUnit.AuthControllerTest.login_shouldReturn400_whenCredentialsInvalid.executor": "Run",
+    "JUnit.AuthControllerTest.login_shouldReturn400_whenInvalidCredentials.executor": "Run",
+    "JUnit.AuthServiceTest.executor": "Run",
+    "JUnit.GymCrmApplicationTest.executor": "Run",
+    "JUnit.RestLoggingInterceptorTest.testPreHandle_and_AfterCompletion_logWithTransactionId.executor": "Run",
+    "JUnit.StorageTest.executor": "Run",
+    "JUnit.TraineeControllerTest (1).executor": "Run",
+    "JUnit.TraineeControllerTest.executor": "Run",
+    "JUnit.TraineeControllerTest.shouldChangePasswordWhenValidRequestWithBody.executor": "Run",
+    "JUnit.TraineeControllerTest.shouldCreateTrainee.executor": "Run",
+    "JUnit.TraineeControllerTest.shouldReturnBadRequestWhenValidationFails.executor": "Run",
+    "JUnit.TraineeControllerTest.shouldUpdateTrainee.executor": "Run",
+    "JUnit.TraineeServiceTest (1).executor": "Run",
+    "JUnit.TraineeServiceTest.createTrainee_shouldThrowException_whenUserIsAlreadyTrainer.executor": "Run",
+    "JUnit.TraineeServiceTest.executor": "Run",
+    "JUnit.TraineeServiceTest.shouldThrowInvalidCredentialsExceptionWhenUserNotFound.executor": "Run",
+    "JUnit.TraineeServiceTest.updateActiveStatus_shouldActivate_whenInactive.executor": "Debug",
+    "JUnit.TrainerControllerTest.executor": "Run",
+    "JUnit.TrainerControllerTest.getTrainerTrainings_shouldReturn401_whenNotAuthenticated.executor": "Run",
+    "JUnit.TrainerControllerTest.shouldCreateTrainer.executor": "Run",
+    "JUnit.TrainerControllerTest.updateTrainerProfile_shouldReturn401_whenNotAuthenticated.executor": "Run",
+    "JUnit.TrainerServiceTest.executor": "Run",
+    "JUnit.TrainerServiceTest.shouldReturnUnassignedTrainersForTrainee.executor": "Run",
+    "JUnit.TrainingControllerTest.executor": "Run",
+    "JUnit.TrainingControllerTest.shouldReturnTrainerTrainingsByCriteria.executor": "Run",
+    "JUnit.TrainingControllerTest.shouldUpdateTraining.executor": "Run",
+    "JUnit.TrainingServiceTest.executor": "Run",
+    "JUnit.TrainingSpecificationTest.executor": "Run",
+    "JUnit.TrainingTypeControllerTest.executor": "Run",
+    "JUnit.TrainingTypeServiceTest.executor": "Run",
+    "JUnit.TransactionIdFilterTest.executor": "Run",
+    "JUnit.com.epam.gymcrm in gym-crm.executor": "Coverage",
+    "JUnit.com.epam.gymcrm.controller in gym-crm.executor": "Coverage",
+    "JUnit.com.epam.gymcrm.service in gym-crm.executor": "Coverage",
+    "JUnit.gymcrm in gym-crm.executor": "Coverage",
+    "JUnit.java in gym-crm.executor": "Coverage",
+    "JUnit.service in gym-crm.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.gym-crm [clean].executor": "Run",
+    "Maven.gym-crm [package].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.GymCrmApplication.executor": "Run",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/tutku/Documents/epam-java-specialization/task_6-spring-boot/gym-crm-spring-boot",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\tutku\Documents\epam-java-specialization\task_5-rest\gym-crm-rest\api-requests" />
@@ -147,11 +159,11 @@
       <recent name="C:\Users\tutku\Documents\epam-java-specialization\task_3-git\gym-crm\api-requests" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.epam.gymcrm" />
       <recent name="com.epam.gymcrm.api.logging" />
       <recent name="com.epam.gymcrm.api.controller" />
       <recent name="com.epam.gymcrm.domain.service" />
       <recent name="com.epam.gymcrm.specification" />
-      <recent name="com.epam.gymcrm.storage" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.epam.gymcrm.api.payload.response" />
@@ -299,6 +311,9 @@
       <workItem from="1754249732710" duration="10000" />
       <workItem from="1754251360187" duration="93000" />
       <workItem from="1754317028023" duration="3769000" />
+      <workItem from="1754322589519" duration="4221000" />
+      <workItem from="1754329178576" duration="127000" />
+      <workItem from="1754329313189" duration="4352000" />
     </task>
     <task id="LOCAL-00042" summary="feat: Add trainer password change functionality via PATCH, with full tests and exception handling">
       <option name="closed" value="true" />
@@ -779,6 +794,7 @@
       <FILTER>com.epam.gymcrm.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/gym_crm$service_in_gym_crm.ic" NAME="service in gym-crm Coverage Results" MODIFIED="1753201450942" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/gym_crm_spring_boot$java_in_gym_crm.ic" NAME="java in gym-crm Coverage Results" MODIFIED="1754333602937" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/gym_crm$All_in_gym_crm.ic" NAME="All in gym-crm Coverage Results" MODIFIED="1752543121422" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/gym_crm$java_in_gym_crm.ic" NAME="java in gym-crm Coverage Results" MODIFIED="1753559514620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
