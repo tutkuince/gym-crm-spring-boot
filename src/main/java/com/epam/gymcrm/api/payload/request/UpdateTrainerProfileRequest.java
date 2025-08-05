@@ -1,22 +1,29 @@
 package com.epam.gymcrm.api.payload.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+@Schema(description = "Request to update trainer profile information")
 public class UpdateTrainerProfileRequest {
+        @Schema(description = "Username of the trainer", example = "trainer_ahmet")
         @NotBlank(message = "Username must not be blank")
         private String username;
 
+        @Schema(description = "First name of the trainer", example = "Ahmet")
         @NotBlank(message = "First name must not be blank")
         private String firstName;
 
+        @Schema(description = "Last name of the trainer", example = "Yılmaz")
         @NotBlank(message = "Last name must not be blank")
         private String lastName;
 
+        @Schema(description = "Specialization ID of the trainer (read-only)", example = "2", accessMode = Schema.AccessMode.READ_ONLY)
         @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         private Long specialization;
 
+        @Schema(description = "Active status of the trainer", example = "true")
         @NotNull(message = "isActive must not be null")
         private Boolean isActive;
 
