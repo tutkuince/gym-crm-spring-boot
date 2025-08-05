@@ -13,9 +13,10 @@ import com.epam.gymcrm.domain.mapper.TrainingDomainMapper;
 import com.epam.gymcrm.domain.model.Trainee;
 import com.epam.gymcrm.domain.model.Trainer;
 import com.epam.gymcrm.domain.model.Training;
-import com.epam.gymcrm.exception.BadRequestException;
-import com.epam.gymcrm.exception.NotFoundException;
-import com.epam.gymcrm.exception.TrainerScheduleConflictException;
+import com.epam.gymcrm.domain.exception.BadRequestException;
+import com.epam.gymcrm.domain.exception.NotFoundException;
+import com.epam.gymcrm.domain.exception.TrainerScheduleConflictException;
+import com.epam.gymcrm.infrastructure.monitoring.metrics.TrainingMetrics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -31,15 +32,18 @@ public class TrainingService {
     private final TrainingRepository trainingRepository;
     private final TrainerRepository trainerRepository;
     private final TraineeRepository traineeRepository;
+    private final TrainingMetrics metrics;
 
     private static final Logger logger = LoggerFactory.getLogger(TrainingService.class);
 
     public TrainingService(TrainingRepository trainingRepository,
                            TrainerRepository trainerRepository,
-                           TraineeRepository traineeRepository) {
+                           TraineeRepository traineeRepository,
+                           TrainingMetrics metrics) {
         this.trainingRepository = trainingRepository;
         this.trainerRepository = trainerRepository;
         this.traineeRepository = traineeRepository;
+        this.metrics = metrics;
     }
 
     @Transactional
@@ -81,6 +85,7 @@ public class TrainingService {
 
         checkTrainerAvailability(trainer.getId(), training.getTrainingDate());
         trainingRepository.save(trainingEntity);
+        metrics.incrementCreated();
 
         logger.info("Training added successfully: trainingId={}, trainingName='{}', traineeUsername='{}', trainerUsername='{}'",
                 trainingEntity.getId(), trainingEntity.getTrainingName(), request.traineeUsername(), request.trainerUsername());

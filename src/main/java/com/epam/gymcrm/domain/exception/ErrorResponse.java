@@ -1,4 +1,4 @@
-package com.epam.gymcrm.exception;
+package com.epam.gymcrm.domain.exception;
 
 import java.time.LocalDateTime;
 import java.util.List;

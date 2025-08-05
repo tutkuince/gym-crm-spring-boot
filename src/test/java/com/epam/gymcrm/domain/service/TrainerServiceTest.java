@@ -13,13 +13,15 @@ import com.epam.gymcrm.db.entity.TrainingEntity;
 import com.epam.gymcrm.db.entity.TrainingTypeEntity;
 import com.epam.gymcrm.db.entity.UserEntity;
 import com.epam.gymcrm.db.repository.*;
-import com.epam.gymcrm.exception.BadRequestException;
-import com.epam.gymcrm.exception.NotFoundException;
+import com.epam.gymcrm.domain.exception.BadRequestException;
+import com.epam.gymcrm.domain.exception.NotFoundException;
+import com.epam.gymcrm.infrastructure.monitoring.metrics.TrainerMetrics;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -43,6 +45,9 @@ class TrainerServiceTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private TrainerMetrics metrics;
 
     @Mock
     private TraineeRepository traineeRepository;
@@ -93,6 +98,7 @@ class TrainerServiceTest {
         savedEntity.setUser(userEntity);
 
         when(trainerRepository.save(any())).thenReturn(savedEntity);
+        doNothing().when(metrics).incrementRegistered();
 
         TrainerRegistrationResponse response = trainerService.createTrainer(request);
 

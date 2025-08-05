@@ -3,9 +3,9 @@ package com.epam.gymcrm.api.controller;
 
 import com.epam.gymcrm.api.payload.request.AddTrainingRequest;
 import com.epam.gymcrm.domain.service.TrainingService;
-import com.epam.gymcrm.exception.GlobalExceptionHandler;
-import com.epam.gymcrm.exception.NotFoundException;
-import com.epam.gymcrm.exception.TrainerScheduleConflictException;
+import com.epam.gymcrm.domain.exception.GlobalExceptionHandler;
+import com.epam.gymcrm.domain.exception.NotFoundException;
+import com.epam.gymcrm.domain.exception.TrainerScheduleConflictException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

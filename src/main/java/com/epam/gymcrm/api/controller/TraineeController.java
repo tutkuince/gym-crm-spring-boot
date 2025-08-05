@@ -3,7 +3,7 @@ package com.epam.gymcrm.api.controller;
 import com.epam.gymcrm.api.payload.request.*;
 import com.epam.gymcrm.api.payload.response.*;
 import com.epam.gymcrm.domain.service.TraineeService;
-import com.epam.gymcrm.exception.UnauthorizedException;
+import com.epam.gymcrm.domain.exception.UnauthorizedException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

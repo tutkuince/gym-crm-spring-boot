@@ -9,7 +9,7 @@ import com.epam.gymcrm.api.payload.response.TrainerRegistrationResponse;
 import com.epam.gymcrm.api.payload.response.TrainerTrainingsListResponse;
 import com.epam.gymcrm.api.payload.response.UpdateTrainerProfileResponse;
 import com.epam.gymcrm.domain.service.TrainerService;
-import com.epam.gymcrm.exception.UnauthorizedException;
+import com.epam.gymcrm.domain.exception.UnauthorizedException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

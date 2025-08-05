@@ -4,17 +4,21 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class AuthSessionManager {
-    private static final Map<String, Boolean> serssionMap = new ConcurrentHashMap<>();
+    private static final Map<String, Boolean> sessionMap = new ConcurrentHashMap<>();
 
     public static void login(String username) {
-        serssionMap.put(username, true);
+        sessionMap.put(username, true);
     }
 
     public static boolean isLoggedInd(String username) {
-        return serssionMap.getOrDefault(username, false);
+        return sessionMap.getOrDefault(username, false);
     }
 
     public static void logout(String username) {
-        serssionMap.remove(username);
+        sessionMap.remove(username);
+    }
+
+    public static void clearAll() {
+        sessionMap.clear();
     }
 }

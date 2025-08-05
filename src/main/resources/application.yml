@@ -28,3 +28,17 @@ logging:
   level:
     root: WARN
     com.epam.gymcrm: INFO
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  prometheus:
+    metrics:
+      export:
+        enabled: true

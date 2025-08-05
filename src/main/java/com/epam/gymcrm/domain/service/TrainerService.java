@@ -21,8 +21,9 @@ import com.epam.gymcrm.domain.mapper.TrainerDomainMapper;
 import com.epam.gymcrm.domain.mapper.TrainingTypeDomainMapper;
 import com.epam.gymcrm.domain.model.Trainer;
 import com.epam.gymcrm.domain.model.User;
-import com.epam.gymcrm.exception.BadRequestException;
-import com.epam.gymcrm.exception.NotFoundException;
+import com.epam.gymcrm.domain.exception.BadRequestException;
+import com.epam.gymcrm.domain.exception.NotFoundException;
+import com.epam.gymcrm.infrastructure.monitoring.metrics.TrainerMetrics;
 import com.epam.gymcrm.util.UserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,21 +44,24 @@ public class TrainerService {
     private final UserRepository userRepository;
     private final TraineeRepository traineeRepository;
     private final TrainingRepository trainingRepository;
+    private final TrainingTypeRepository trainingTypeRepository;
+    private final TrainerMetrics metrics;
 
     private static final Logger logger = LoggerFactory.getLogger(TrainerService.class);
-    private final TrainingTypeRepository trainingTypeRepository;
 
     public TrainerService(
             TrainerRepository trainerRepository,
             UserRepository userRepository,
             TraineeRepository traineeRepository,
             TrainingRepository trainingRepository,
-            TrainingTypeRepository trainingTypeRepository) {
+            TrainingTypeRepository trainingTypeRepository,
+            TrainerMetrics metrics) {
         this.trainerRepository = trainerRepository;
         this.userRepository = userRepository;
         this.traineeRepository = traineeRepository;
         this.trainingRepository = trainingRepository;
         this.trainingTypeRepository = trainingTypeRepository;
+        this.metrics = metrics;
     }
 
     @Transactional
@@ -84,6 +88,7 @@ public class TrainerService {
         TrainerEntity trainerEntity = TrainerDomainMapper.toTrainerEntity(trainer);
 
         TrainerEntity saved = trainerRepository.save(trainerEntity);
+        metrics.incrementRegistered();
 
         logger.info("Trainer registered successfully. id={}, username={}", saved.getId(), saved.getUser().getUsername());
 
@@ -123,6 +128,7 @@ public class TrainerService {
 
         TrainerEntity updatedEntity = TrainerDomainMapper.toTrainerEntity(trainer);
         trainerRepository.save(updatedEntity);
+        metrics.incrementUpdated();
 
         logger.info("Trainer profile updated successfully. username={}", request.getUsername());
 
@@ -188,6 +194,11 @@ public class TrainerService {
         updated.setTrainingType(trainerEntity.getTrainingType());
 
         trainerRepository.save(updated);
+        if (updateActiveStatusRequest.isActive()) {
+            metrics.incrementActivated();
+        } else {
+            metrics.incrementDeactivated();
+        }
 
         logger.info("Trainer active status updated successfully. username={}", username);
     }

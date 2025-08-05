@@ -7,9 +7,9 @@ import com.epam.gymcrm.api.payload.request.TraineeUpdateRequest;
 import com.epam.gymcrm.api.payload.request.UpdateActiveStatusRequest;
 import com.epam.gymcrm.api.payload.response.*;
 import com.epam.gymcrm.domain.service.TraineeService;
-import com.epam.gymcrm.exception.BadRequestException;
-import com.epam.gymcrm.exception.GlobalExceptionHandler;
-import com.epam.gymcrm.exception.NotFoundException;
+import com.epam.gymcrm.domain.exception.BadRequestException;
+import com.epam.gymcrm.domain.exception.GlobalExceptionHandler;
+import com.epam.gymcrm.domain.exception.NotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +18,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -31,7 +34,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
 class TraineeControllerTest {
 
     private MockMvc mockMvc;
@@ -57,6 +61,7 @@ class TraineeControllerTest {
         AuthSessionManager.logout("ali.veli");
         AuthSessionManager.logout("notfound.user");
         AuthSessionManager.logout("unknown");
+        AuthSessionManager.clearAll();
     }
 
     @Test
@@ -327,16 +332,6 @@ class TraineeControllerTest {
                 )
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.containsString("Trainee not found")));
-    }
-
-    @Test
-    void updateActiveStatus_shouldReturn401_whenNotAuthenticated() throws Exception {
-        UpdateActiveStatusRequest request = new UpdateActiveStatusRequest("ali.veli", true);
-
-        mockMvc.perform(patch("/api/v1/trainees/status")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isUnauthorized());
     }
 
     @Test

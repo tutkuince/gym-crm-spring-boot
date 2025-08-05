@@ -9,14 +9,16 @@ import com.epam.gymcrm.db.repository.TraineeRepository;
 import com.epam.gymcrm.db.repository.TrainerRepository;
 import com.epam.gymcrm.db.repository.TrainingRepository;
 import com.epam.gymcrm.db.repository.TrainingTypeRepository;
-import com.epam.gymcrm.exception.BadRequestException;
-import com.epam.gymcrm.exception.NotFoundException;
-import com.epam.gymcrm.exception.TrainerScheduleConflictException;
+import com.epam.gymcrm.domain.exception.BadRequestException;
+import com.epam.gymcrm.domain.exception.NotFoundException;
+import com.epam.gymcrm.domain.exception.TrainerScheduleConflictException;
+import com.epam.gymcrm.infrastructure.monitoring.metrics.TrainingMetrics;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
@@ -37,6 +39,8 @@ class TrainingServiceTest {
     private TraineeRepository traineeRepository;
     @Mock
     private TrainingTypeRepository trainingTypeRepository;
+    @Mock
+    private TrainingMetrics metrics;
 
     @InjectMocks
     private TrainingService trainingService;
@@ -73,6 +77,7 @@ class TrainingServiceTest {
         when(traineeRepository.findByUserUsername("trainee1")).thenReturn(Optional.of(traineeEntity));
         when(trainerRepository.findByUserUsername("trainer1")).thenReturn(Optional.of(trainerEntity));
         when(trainingRepository.findByTrainerIdAndTrainingDate(eq(2L), any())).thenReturn(Optional.empty());
+        doNothing().when(metrics).incrementCreated();
 
         assertDoesNotThrow(() -> trainingService.addTraining(request));
 

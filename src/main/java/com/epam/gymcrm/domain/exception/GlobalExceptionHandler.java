@@ -1,4 +1,4 @@
-package com.epam.gymcrm.exception;
+package com.epam.gymcrm.domain.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

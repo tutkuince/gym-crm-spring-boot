@@ -8,13 +8,15 @@ import com.epam.gymcrm.db.repository.TrainerRepository;
 import com.epam.gymcrm.db.repository.TrainingRepository;
 import com.epam.gymcrm.db.repository.UserRepository;
 import com.epam.gymcrm.domain.model.User;
-import com.epam.gymcrm.exception.BadRequestException;
-import com.epam.gymcrm.exception.NotFoundException;
+import com.epam.gymcrm.domain.exception.BadRequestException;
+import com.epam.gymcrm.domain.exception.NotFoundException;
+import com.epam.gymcrm.infrastructure.monitoring.metrics.TraineeMetrics;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -40,6 +42,8 @@ class TraineeServiceTest {
     private TrainerRepository trainerRepository;
     @Mock
     private TrainingRepository trainingRepository;
+    @Mock
+    private TraineeMetrics metrics;
 
     @InjectMocks
     private TraineeService traineeService;
@@ -80,6 +84,7 @@ class TraineeServiceTest {
         when(traineeRepository.save(any(TraineeEntity.class)))
                 .thenReturn(savedTraineeEntity);
 
+        doNothing().when(metrics).incrementRegistered();
         TraineeRegistrationResponse result = traineeService.createTrainee(request);
 
         assertNotNull(result);
@@ -134,6 +139,7 @@ class TraineeServiceTest {
         traineeEntity.setId(10L);
         traineeEntity.setUser(userEntity);
 
+        doNothing().when(metrics).incrementUpdated();
         when(traineeRepository.findByUserUsernameWithTrainers("ali.veli"))
                 .thenReturn(Optional.of(traineeEntity));
         when(traineeRepository.save(any(TraineeEntity.class)))
@@ -227,6 +233,9 @@ class TraineeServiceTest {
 
         when(traineeRepository.findByUserUsernameWithTrainers("ali.veli"))
                 .thenReturn(Optional.of(traineeEntity));
+        doNothing().when(metrics).incrementUpdated();
+
+
         when(traineeRepository.save(any(TraineeEntity.class)))
                 .thenAnswer(inv -> inv.getArgument(0));
 
@@ -409,6 +418,7 @@ class TraineeServiceTest {
         TraineeEntity traineeEntity = new TraineeEntity();
         traineeEntity.setUser(userEntity);
 
+        doNothing().when(metrics).incrementActivated();
         when(traineeRepository.findByUserUsername(username)).thenReturn(Optional.of(traineeEntity));
         when(traineeRepository.save(any(TraineeEntity.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
@@ -429,6 +439,7 @@ class TraineeServiceTest {
         TraineeEntity traineeEntity = new TraineeEntity();
         traineeEntity.setUser(userEntity);
 
+        doNothing().when(metrics).incrementDeactivated();
         when(traineeRepository.findByUserUsername(username))
                 .thenReturn(Optional.of(traineeEntity));
         when(traineeRepository.save(any(TraineeEntity.class)))

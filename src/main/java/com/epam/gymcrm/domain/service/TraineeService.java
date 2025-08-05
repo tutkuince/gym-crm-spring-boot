@@ -16,8 +16,9 @@ import com.epam.gymcrm.domain.mapper.TraineeDomainMapper;
 import com.epam.gymcrm.domain.mapper.TrainerDomainMapper;
 import com.epam.gymcrm.domain.model.Trainee;
 import com.epam.gymcrm.domain.model.User;
-import com.epam.gymcrm.exception.BadRequestException;
-import com.epam.gymcrm.exception.NotFoundException;
+import com.epam.gymcrm.domain.exception.BadRequestException;
+import com.epam.gymcrm.domain.exception.NotFoundException;
+import com.epam.gymcrm.infrastructure.monitoring.metrics.TraineeMetrics;
 import com.epam.gymcrm.util.UserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,7 @@ public class TraineeService {
     private final TrainerRepository trainerRepository;
     private final UserRepository userRepository;
     private final TrainingRepository trainingRepository;
+    private final TraineeMetrics traineeMetrics;
 
     private static final Logger logger = LoggerFactory.getLogger(TraineeService.class);
 
@@ -46,11 +48,13 @@ public class TraineeService {
             TraineeRepository traineeRepository,
             TrainerRepository trainerRepository,
             UserRepository userRepository,
-            TrainingRepository trainingRepository) {
+            TrainingRepository trainingRepository,
+            TraineeMetrics traineeMetrics) {
         this.traineeRepository = traineeRepository;
         this.trainerRepository = trainerRepository;
         this.userRepository = userRepository;
         this.trainingRepository = trainingRepository;
+        this.traineeMetrics = traineeMetrics;
     }
 
     @Transactional
@@ -81,6 +85,7 @@ public class TraineeService {
         TraineeEntity traineeEntity = TraineeDomainMapper.toTraineeEntity(trainee);
 
         TraineeEntity savedTraineeEntity = traineeRepository.save(traineeEntity);
+        traineeMetrics.incrementRegistered();
 
 
         logger.info("Trainee created: id={}, username={}", savedTraineeEntity.getId(), savedTraineeEntity.getUser().getUsername());
@@ -139,6 +144,7 @@ public class TraineeService {
 
         // Save
         TraineeEntity saved = traineeRepository.save(traineeEntity);
+        traineeMetrics.incrementUpdated();
 
         logger.info("Trainee profile updated successfully. id={}, username={}", saved.getId(), saved.getUser().getUsername());
 
@@ -181,6 +187,7 @@ public class TraineeService {
 
         // Save et
         TraineeEntity saved = traineeRepository.save(traineeEntity);
+        traineeMetrics.incrementTrainerUpdated();
 
         logger.info("Updated trainers for trainee: id={}", saved.getId());
 
@@ -246,6 +253,11 @@ public class TraineeService {
         updated.setTrainings(traineeEntity.getTrainings());
 
         traineeRepository.save(updated);
+        if (updateActiveStatusRequest.isActive()) {
+            traineeMetrics.incrementActivated();
+        } else {
+            traineeMetrics.incrementDeactivated();
+        }
 
         logger.info("Trainee activated successfully. id={}, username={}", updated.getId(), updated.getUser().getUsername());
     }

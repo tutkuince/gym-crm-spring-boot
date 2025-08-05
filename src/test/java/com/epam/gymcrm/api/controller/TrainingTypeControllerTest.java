@@ -3,7 +3,7 @@ package com.epam.gymcrm.api.controller;
 import com.epam.gymcrm.api.payload.response.TrainingTypeListResponse;
 import com.epam.gymcrm.api.payload.response.TrainingTypeResponse;
 import com.epam.gymcrm.domain.service.TrainingTypeService;
-import com.epam.gymcrm.exception.GlobalExceptionHandler;
+import com.epam.gymcrm.domain.exception.GlobalExceptionHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

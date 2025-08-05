@@ -1,4 +1,4 @@
-package com.epam.gymcrm.exception;
+package com.epam.gymcrm.domain.exception;
 
 import java.io.Serial;
 
