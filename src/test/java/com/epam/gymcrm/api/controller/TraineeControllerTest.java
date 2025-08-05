@@ -6,10 +6,10 @@ import com.epam.gymcrm.api.payload.request.TraineeTrainerUpdateRequest;
 import com.epam.gymcrm.api.payload.request.TraineeUpdateRequest;
 import com.epam.gymcrm.api.payload.request.UpdateActiveStatusRequest;
 import com.epam.gymcrm.api.payload.response.*;
-import com.epam.gymcrm.domain.service.TraineeService;
 import com.epam.gymcrm.domain.exception.BadRequestException;
 import com.epam.gymcrm.domain.exception.GlobalExceptionHandler;
 import com.epam.gymcrm.domain.exception.NotFoundException;
+import com.epam.gymcrm.domain.service.TraineeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,10 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -34,8 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
+@ExtendWith(MockitoExtension.class)
 class TraineeControllerTest {
 
     private MockMvc mockMvc;
