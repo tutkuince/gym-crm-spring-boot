@@ -4,9 +4,8 @@ server:
 spring:
   application:
     name: gym-crm-prod
-
   profiles:
-    active: default
+    active: local
 
   datasource:
     username: sa
@@ -32,7 +31,6 @@ logging:
   level:
     root: WARN
     com.epam.gymcrm: INFO
-
 
 management:
   endpoints:
