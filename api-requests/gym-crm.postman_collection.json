@@ -105,21 +105,10 @@
 					"name": "Update a Trainee",
 					"request": {
 						"method": "PUT",
-						"header": [
-							{
-								"key": "X-Username",
-								"value": "ali.veli",
-								"type": "text"
-							},
-							{
-								"key": "X-Password",
-								"value": "1234",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"john.doe\",\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"dateOfBirth\": \"1991-01-01\",\r\n    \"address\": \"Izmir\"\r\n    \r\n}",
+							"raw": "{\r\n    \"username\": \"john.doe\",\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"dateOfBirth\": \"1991-01-01\",\r\n    \"address\": \"Izmir\",\r\n    \"isActive\": true\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -144,18 +133,7 @@
 					"name": "Activate Trainee Status",
 					"request": {
 						"method": "PATCH",
-						"header": [
-							{
-								"key": "X-Username",
-								"value": "ali.veli",
-								"type": "text"
-							},
-							{
-								"key": "X-Password",
-								"value": "1234",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"username\": \"john.doe\",\r\n    \"isActive\": true\r\n}",
@@ -184,18 +162,7 @@
 					"name": "Update a Trainee Trainers",
 					"request": {
 						"method": "PUT",
-						"header": [
-							{
-								"key": "X-Username",
-								"value": "ali.veli",
-								"type": "text"
-							},
-							{
-								"key": "X-Password",
-								"value": "1234",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"traineeUsername\": \"john.doe\",\r\n    \"trainers\": [\r\n        {\r\n            \"trainerUsername\": \"olivia.moore\"\r\n        },\r\n        {\r\n            \"trainerUsername\": \"sophia.taylor\"\r\n        }\r\n    ]\r\n}",
@@ -224,18 +191,7 @@
 					"name": "Retrieve a Trainee By Username",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "X-Username",
-								"value": "ali.veli",
-								"type": "text"
-							},
-							{
-								"key": "X-Password",
-								"value": "1234",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "{{baseURL}}/api/v1/trainees/profile?username=john.doe",
 							"host": [
@@ -261,18 +217,7 @@
 					"name": "Retrieve Trainee Unassigned Trainers",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "X-Username",
-								"value": "ali.veli",
-								"type": "text"
-							},
-							{
-								"key": "X-Password",
-								"value": "1234",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "{{baseURL}}/api/v1/trainees/unassigned-trainers?username=john.doe",
 							"host": [
@@ -340,18 +285,7 @@
 					"name": "Delete a Trainee By Username",
 					"request": {
 						"method": "DELETE",
-						"header": [
-							{
-								"key": "X-Username",
-								"value": "ali.veli",
-								"type": "text"
-							},
-							{
-								"key": "X-Password",
-								"value": "1234",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "{{baseURL}}/api/v1/trainees/ahmet.kek",
 							"host": [
@@ -437,18 +371,7 @@
 					"name": "Update a Trainer",
 					"request": {
 						"method": "PUT",
-						"header": [
-							{
-								"key": "X-Username",
-								"value": "ayse.yilmaz",
-								"type": "text"
-							},
-							{
-								"key": "X-Password",
-								"value": "abcd",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"username\": \"tim.cook\",\r\n    \"firstName\": \"Tim\",\r\n    \"lastName\": \"Cookie\",\r\n    \"specialization\": 1,\r\n    \"active\": true\r\n}",
@@ -477,18 +400,7 @@
 					"name": "Activate a Trainer",
 					"request": {
 						"method": "PATCH",
-						"header": [
-							{
-								"key": "X-Username",
-								"value": "ayse.yilmaz",
-								"type": "text"
-							},
-							{
-								"key": "X-Password",
-								"value": "abcd",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"username\": \"tim.cook\",\r\n    \"isActive\": true\r\n}",
@@ -517,18 +429,7 @@
 					"name": "Retrieve a Trainer By Username",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "X-Username",
-								"value": "ayse.yilmaz",
-								"type": "text"
-							},
-							{
-								"key": "X-Password",
-								"value": "abcd",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "{{baseURL}}/api/v1/trainers/profile?username=tim.cook",
 							"host": [

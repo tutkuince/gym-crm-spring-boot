@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -140,7 +139,7 @@ class TraineeServiceTest {
         traineeEntity.setUser(userEntity);
 
         doNothing().when(metrics).incrementUpdated();
-        when(traineeRepository.findByUserUsernameWithTrainers("ali.veli"))
+        when(traineeRepository.findByUserUsername("ali.veli"))
                 .thenReturn(Optional.of(traineeEntity));
         when(traineeRepository.save(any(TraineeEntity.class)))
                 .thenAnswer(inv -> inv.getArgument(0));
@@ -155,7 +154,7 @@ class TraineeServiceTest {
         assertEquals("Istanbul", response.address());
         assertTrue(response.isActive());
 
-        verify(traineeRepository).findByUserUsernameWithTrainers("ali.veli");
+        verify(traineeRepository).findByUserUsername("ali.veli");
         verify(traineeRepository).save(any(TraineeEntity.class));
     }
 
@@ -165,13 +164,13 @@ class TraineeServiceTest {
                 "notfound", "Test", "User", null, null, true
         );
 
-        when(traineeRepository.findByUserUsernameWithTrainers("notfound"))
+        when(traineeRepository.findByUserUsername("notfound"))
                 .thenReturn(Optional.empty());
 
         NotFoundException ex = assertThrows(NotFoundException.class, () -> traineeService.update(request));
 
         assertTrue(ex.getMessage().contains("Trainee not found"));
-        verify(traineeRepository).findByUserUsernameWithTrainers("notfound");
+        verify(traineeRepository).findByUserUsername("notfound");
     }
 
     @Test
@@ -183,7 +182,7 @@ class TraineeServiceTest {
         traineeEntity.setId(1L);
         traineeEntity.setUser(null);
 
-        when(traineeRepository.findByUserUsernameWithTrainers("ali.veli"))
+        when(traineeRepository.findByUserUsername("ali.veli"))
                 .thenReturn(Optional.of(traineeEntity));
 
         IllegalStateException ex = assertThrows(IllegalStateException.class, () -> traineeService.update(request));
@@ -205,7 +204,7 @@ class TraineeServiceTest {
         traineeEntity.setId(10L);
         traineeEntity.setUser(userEntity);
 
-        when(traineeRepository.findByUserUsernameWithTrainers("ali.veli"))
+        when(traineeRepository.findByUserUsername("ali.veli"))
                 .thenReturn(Optional.of(traineeEntity));
 
         BadRequestException ex = assertThrows(BadRequestException.class, () -> traineeService.update(request));
@@ -231,7 +230,7 @@ class TraineeServiceTest {
         traineeEntity.setId(10L);
         traineeEntity.setUser(userEntity);
 
-        when(traineeRepository.findByUserUsernameWithTrainers("ali.veli"))
+        when(traineeRepository.findByUserUsername("ali.veli"))
                 .thenReturn(Optional.of(traineeEntity));
         doNothing().when(metrics).incrementUpdated();
 
@@ -249,7 +248,7 @@ class TraineeServiceTest {
         assertNull(response.address());
         assertTrue(response.isActive());
 
-        verify(traineeRepository).findByUserUsernameWithTrainers("ali.veli");
+        verify(traineeRepository).findByUserUsername("ali.veli");
         verify(traineeRepository).save(any(TraineeEntity.class));
     }
 
@@ -297,6 +296,27 @@ class TraineeServiceTest {
         traineeEntity.setTrainers(new HashSet<>());
 
         // trainer1
+        List<TrainerEntity> trainers = getTrainerEntities();
+
+        when(traineeRepository.findByUserUsernameWithTrainers(traineeUsername)).thenReturn(Optional.of(traineeEntity));
+        when(trainerRepository.findAllByUserUsernameIn(any())).thenReturn(trainers);
+        when(traineeRepository.save(any(TraineeEntity.class))).thenReturn(traineeEntity);
+
+        TraineeTrainerUpdateResponse response = traineeService.updateTraineeTrainers(request);
+
+        assertNotNull(response);
+        assertEquals(2, response.trainers().size());
+        assertEquals("trainer1", response.trainers().get(0).trainerUsername());
+        assertEquals("Ahmet", response.trainers().get(0).trainerFirstName());
+        assertEquals("trainer2", response.trainers().get(1).trainerUsername());
+        assertEquals("Ayşe", response.trainers().get(1).trainerFirstName());
+
+        verify(traineeRepository).findByUserUsernameWithTrainers(traineeUsername);
+        verify(trainerRepository).findAllByUserUsernameIn(List.of("trainer1", "trainer2"));
+        verify(traineeRepository).save(any(TraineeEntity.class));
+    }
+
+    private static List<TrainerEntity> getTrainerEntities() {
         TrainerEntity trainer1 = new TrainerEntity();
         UserEntity trainerUser1 = new UserEntity();
         trainerUser1.setUsername("trainer1");
@@ -320,24 +340,7 @@ class TraineeServiceTest {
         trainingType2.setTrainingTypeName("Fitness");
         trainer2.setTrainingType(trainingType2);
 
-        List<TrainerEntity> trainers = List.of(trainer1, trainer2);
-
-        when(traineeRepository.findByUserUsernameWithTrainers(traineeUsername)).thenReturn(Optional.of(traineeEntity));
-        when(trainerRepository.findAllByUserUsernameIn(any())).thenReturn(trainers);
-        when(traineeRepository.save(any(TraineeEntity.class))).thenReturn(traineeEntity);
-
-        TraineeTrainerUpdateResponse response = traineeService.updateTraineeTrainers(request);
-
-        assertNotNull(response);
-        assertEquals(2, response.trainers().size());
-        assertEquals("trainer1", response.trainers().get(0).trainerUsername());
-        assertEquals("Ahmet", response.trainers().get(0).trainerFirstName());
-        assertEquals("trainer2", response.trainers().get(1).trainerUsername());
-        assertEquals("Ayşe", response.trainers().get(1).trainerFirstName());
-
-        verify(traineeRepository).findByUserUsernameWithTrainers(traineeUsername);
-        verify(trainerRepository).findAllByUserUsernameIn(List.of("trainer1", "trainer2"));
-        verify(traineeRepository).save(any(TraineeEntity.class));
+        return List.of(trainer1, trainer2);
     }
 
     @Test

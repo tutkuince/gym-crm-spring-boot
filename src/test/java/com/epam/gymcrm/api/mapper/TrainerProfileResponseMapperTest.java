@@ -21,6 +21,19 @@ class TrainerProfileResponseMapperTest {
         user.setLastName("Bir");
         user.setActive(true);
 
+        TrainerEntity trainer = getTrainerEntity(user);
+
+        TrainerProfileResponse res = TrainerProfileResponseMapper.toResponse(trainer);
+
+        assertEquals("Trainer", res.firstName());
+        assertEquals("Bir", res.lastName());
+        assertEquals(11L, res.specialization());
+        assertTrue(res.isActive());
+        assertEquals(1, res.trainees().size());
+        assertEquals("trainee1", res.trainees().getFirst().username());
+    }
+
+    private static TrainerEntity getTrainerEntity(UserEntity user) {
         TrainingTypeEntity trainingType = new TrainingTypeEntity();
         trainingType.setId(11L);
 
@@ -38,15 +51,7 @@ class TrainerProfileResponseMapperTest {
         trainer.setUser(user);
         trainer.setTrainingType(trainingType);
         trainer.setTrainees(Set.of(trainee));
-
-        TrainerProfileResponse res = TrainerProfileResponseMapper.toResponse(trainer);
-
-        assertEquals("Trainer", res.firstName());
-        assertEquals("Bir", res.lastName());
-        assertEquals(11L, res.specialization());
-        assertTrue(res.isActive());
-        assertEquals(1, res.trainees().size());
-        assertEquals("trainee1", res.trainees().getFirst().username());
+        return trainer;
     }
 
     @Test

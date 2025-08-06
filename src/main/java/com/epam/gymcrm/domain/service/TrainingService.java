@@ -95,7 +95,7 @@ public class TrainingService {
         checkTrainerAvailability(trainer.getId(), training.getTrainingDate());
 
         // Save training
-        TrainingEntity saved = trainingRepository.save(trainingEntity);
+        trainingRepository.save(trainingEntity);
         metrics.incrementCreated();
 
         logger.info("Training added successfully: trainingId={}, trainingName='{}', traineeUsername='{}', trainerUsername='{}'",

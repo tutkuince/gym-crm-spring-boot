@@ -108,7 +108,7 @@ public class TraineeService {
         String username = request.username();
         logger.info("Trainee update request received. username={}", username);
 
-        TraineeEntity traineeEntity = traineeRepository.findByUserUsernameWithTrainers(username)
+        TraineeEntity traineeEntity = traineeRepository.findByUserUsername(username)
                 .orElseThrow(() -> {
                     logger.warn("Update failed: Trainee not found. username={}", username);
                     return new NotFoundException("Trainee not found with username: " + username);

@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@SuppressWarnings({"unchecked", "rawtypes"})
 class TrainerTrainingSpecificationTest {
 
     @Test
