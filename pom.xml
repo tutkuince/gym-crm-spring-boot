@@ -107,6 +107,12 @@
 						<goals>
 							<goal>report</goal>
 						</goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/config/**</exclude>
+                                <exclude>**/GymCrmApplication*</exclude>
+                            </excludes>
+                        </configuration>
 					</execution>
 					
 					<execution>
@@ -127,6 +133,10 @@
 									</limits>
 								</rule>
 							</rules>
+                            <excludes>
+                                <exclude>**/config/**</exclude>
+                                <exclude>**/GymCrmApplication*</exclude>
+                            </excludes>
 						</configuration>
 					</execution>
 				</executions>

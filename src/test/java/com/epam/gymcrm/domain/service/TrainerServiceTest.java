@@ -15,13 +15,16 @@ import com.epam.gymcrm.db.entity.UserEntity;
 import com.epam.gymcrm.db.repository.*;
 import com.epam.gymcrm.domain.exception.BadRequestException;
 import com.epam.gymcrm.domain.exception.NotFoundException;
+import com.epam.gymcrm.domain.mapper.TrainerDomainMapper;
+import com.epam.gymcrm.domain.model.Trainer;
+import com.epam.gymcrm.domain.model.User;
 import com.epam.gymcrm.infrastructure.monitoring.metrics.TrainerMetrics;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -219,6 +222,41 @@ class TrainerServiceTest {
     }
 
     @Test
+    void updateTrainerProfile_shouldThrowIllegalStateException_whenUpdateProfileFails() {
+        UpdateTrainerProfileRequest request = new UpdateTrainerProfileRequest();
+        request.setUsername("ali.veli");
+        request.setFirstName("Mehmet");
+        request.setLastName("Kaya");
+        request.setSpecialization(1L);
+        request.setActive(true);
+
+        TrainerEntity trainerEntity = new TrainerEntity();
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername("ali.veli");
+        trainerEntity.setUser(userEntity);
+
+        when(trainerRepository.findByUserUsernameWithTrainees("ali.veli"))
+                .thenReturn(Optional.of(trainerEntity));
+
+        Trainer mockTrainer = mock(Trainer.class);
+
+        try (MockedStatic<TrainerDomainMapper> mockedMapper = mockStatic(TrainerDomainMapper.class)) {
+            mockedMapper.when(() -> TrainerDomainMapper.toTrainer(trainerEntity))
+                    .thenReturn(mockTrainer);
+
+            doThrow(new IllegalStateException("Update failed"))
+                    .when(mockTrainer).updateProfile("Mehmet", "Kaya", true);
+
+            assertThrows(IllegalStateException.class, () -> trainerService.updateTrainerProfile(request));
+
+            verify(trainerRepository, never()).save(any());
+        }
+
+        verify(trainerRepository).findByUserUsernameWithTrainees("ali.veli");
+    }
+
+
+    @Test
     void updateTrainerProfile_shouldThrowIllegalState_whenUserIsNull() {
         TrainerEntity trainerEntity = new TrainerEntity();
         trainerEntity.setId(1L);
@@ -240,7 +278,7 @@ class TrainerServiceTest {
     }
 
     @SuppressWarnings("unchecked")
-	@Test
+    @Test
     void getTrainerTrainings_shouldReturnResponse_whenTrainerExists() {
         // Arrange
         String username = "ali.veli";
@@ -344,4 +382,44 @@ class TrainerServiceTest {
         verify(trainerRepository, times(2)).findByUserUsername(username);
         verify(trainerRepository, never()).save(any());
     }
+
+    @Test
+    void updateActivateStatus_shouldDeactivate_whenRequestIsInactive() {
+        String username = "ali.veli";
+        UpdateActiveStatusRequest request = new UpdateActiveStatusRequest(username, false);
+
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername(username);
+        userEntity.setActive(true);
+
+        TrainerEntity trainerEntity = new TrainerEntity();
+        trainerEntity.setUser(userEntity);
+
+        when(trainerRepository.findByUserUsername(username)).thenReturn(Optional.of(trainerEntity));
+        when(trainerRepository.save(any(TrainerEntity.class))).thenReturn(trainerEntity);
+
+        // Trainer mock
+        Trainer mockTrainer = mock(Trainer.class);
+        User mockUser = new User();
+        mockUser.setUsername(username);
+        mockUser.setActive(true);
+
+        when(mockTrainer.getUser()).thenReturn(mockUser);
+
+        try (MockedStatic<TrainerDomainMapper> mockedMapper = mockStatic(TrainerDomainMapper.class)) {
+            mockedMapper.when(() -> TrainerDomainMapper.toTrainerShallow(trainerEntity))
+                    .thenReturn(mockTrainer);
+
+            mockedMapper.when(() -> TrainerDomainMapper.toTrainerEntity(mockTrainer))
+                    .thenReturn(trainerEntity);
+
+            assertDoesNotThrow(() -> trainerService.updateActivateStatus(request));
+
+            verify(metrics).incrementDeactivated();
+            verify(metrics, never()).incrementActivated();
+            verify(trainerRepository).findByUserUsername(username);
+            verify(trainerRepository).save(any(TrainerEntity.class));
+        }
+    }
+
 }
